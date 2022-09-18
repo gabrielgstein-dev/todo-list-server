@@ -7,12 +7,6 @@ export class UserEntity {
 
   @Column({
     type: 'varchar',
-    name: 'name',
-  })
-  name: string;
-
-  @Column({
-    type: 'varchar',
     name: 'email',
   })
   email: string;

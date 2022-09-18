@@ -1,12 +1,13 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class user1663447994259 implements MigrationInterface {
+export class project1663512183393 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     return queryRunner.query(`
-      create table tb_user(
+      create table tb_project(
           id serial primary key,
-          email varchar(255) not null,
-          password varchar(255) not null
+          name varchar(255) not null,
+          password varchar(255) not null,
+          tasks int references tb_task(id)
       );
       `);
   }

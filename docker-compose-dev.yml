@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 volumes:
   pg_data:
@@ -11,7 +11,7 @@ services:
     environment:
       - POSTGRES_USER=usuario
       - POSTGRES_DB=teste
-      - POSTGRES_PASSWORD=123456
+      - POSTGRES_PASSWORD='123456'
     ports:
       - 5432:5432
     volumes:

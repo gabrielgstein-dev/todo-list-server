@@ -22,4 +22,7 @@ export const enviroment = {
   get DATABASE_PASSWORD() {
     return process.env.DATABASE_PASSWORD;
   },
+  get SECRET_AUTH() {
+    return process.env.SECRET_AUTH || 'S3Cr3T!@#$%ˆ';
+  },
 };

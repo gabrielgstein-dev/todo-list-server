@@ -1,12 +1,14 @@
 import {
   Column,
   Entity,
-  PrimaryGeneratedColumn,
-  OneToOne,
   JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import { TaskEntity } from './task.entity';
+import { UserEntity } from './user.entity';
 
 @Entity('tb_project')
 export class ProjectEntity {
@@ -19,7 +21,15 @@ export class ProjectEntity {
   })
   name: string;
 
-  @OneToOne((type) => TaskEntity)
-  @JoinColumn()
-  taskList: TaskEntity;
+  @Column({
+    name: 'user_id',
+  })
+  userId: number;
+
+  @OneToMany(() => TaskEntity, (task) => task.project)
+  taskList: TaskEntity[];
+
+  @ManyToOne(() => UserEntity, (user) => user.projectList)
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
 }

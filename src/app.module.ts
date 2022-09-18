@@ -7,6 +7,8 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as entities from './database/entities';
+import { ProjectController } from './controllers/project.controller';
+import { ProjectService } from './services/project.service';
 
 @Module({
   imports: [
@@ -17,7 +19,7 @@ import * as entities from './database/entities';
     DatabaseModule,
     TypeOrmModule.forFeature(Object.values(entities)),
   ],
-  controllers: [AppController, UserController],
-  providers: [AppService, UserService],
+  controllers: [AppController, UserController, ProjectController],
+  providers: [AppService, UserService, ProjectService],
 })
 export class AppModule {}

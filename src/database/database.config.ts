@@ -1,6 +1,7 @@
 import { enviroment } from '../enviroment';
 import { DbType } from '../shared/types/common.type';
 import * as entities from './entities';
+import * as path from 'path';
 
 export default {
   type: enviroment.DATABASE_TYPE as DbType,
@@ -10,6 +11,6 @@ export default {
   password: enviroment.DATABASE_PASSWORD,
   database: enviroment.DATABASE_DB,
   entities: Object.values(entities),
-  migrations: [`${__dirname}/database/migrations/*.ts`],
+  migrations: [path.resolve(__dirname, `./migrations/*.ts`)],
   synchronize: false,
 };

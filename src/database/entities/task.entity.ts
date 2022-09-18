@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 import { ProjectEntity } from './project.entity';
 
@@ -18,7 +19,12 @@ export class TaskEntity {
   })
   name: string;
 
-  @OneToOne((type) => ProjectEntity)
-  @JoinColumn()
-  projectId: ProjectEntity;
+  @Column({
+    name: 'project_id',
+  })
+  projectId: number;
+
+  @ManyToOne(() => ProjectEntity, (project) => project.taskList)
+  @JoinColumn({ name: 'project_id' })
+  project: ProjectEntity;
 }

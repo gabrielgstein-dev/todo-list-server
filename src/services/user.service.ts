@@ -17,6 +17,23 @@ export class UserService {
   findById(id: number) {
     return this.userRepo.findOne({
       where: { id: id },
+      select: ['id', 'email'],
+    });
+  }
+
+  findProjectsAndTasks() {
+    return this.userRepo.find({
+      select: ['id', 'email'],
+      relations: ['projectList', 'projectList.taskList'],
+    });
+  }
+
+  async authenticate(
+    email: string,
+    password: string,
+  ): Promise<UserEntity | null> {
+    return this.userRepo.findOne({
+      where: { email: email, password: password },
     });
   }
 }

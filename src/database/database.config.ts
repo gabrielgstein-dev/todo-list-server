@@ -3,6 +3,7 @@ import { DbType } from '../shared/types/common.type';
 import * as entities from './entities';
 import * as path from 'path';
 
+console.log(`${__dirname}/migrations/*.ts`);
 export default {
   type: enviroment.DATABASE_TYPE as DbType,
   host: enviroment.DATABASE_HOST,

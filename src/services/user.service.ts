@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../database/entities';
 import { InjectRepository } from '@nestjs/typeorm';
+import { AuthHelper } from 'src/helpers/auth.helper';
 
 @Injectable()
 export class UserService {
@@ -33,7 +34,22 @@ export class UserService {
     password: string,
   ): Promise<UserEntity | null> {
     return this.userRepo.findOne({
-      where: { email: email, password: password },
+      where: { email: email, password: await AuthHelper.signJwt(password) },
+    });
+  }
+
+  async register(email: string, password: string): Promise<UserEntity | null> {
+    const existUser = await this.userRepo.find({
+      where: { email: email },
+    });
+
+    if (existUser.length) {
+      throw new HttpException('INVALID_PARAMETERS', 400);
+    }
+
+    return this.userRepo.save({
+      email,
+      password: await AuthHelper.signJwt(password),
     });
   }
 }

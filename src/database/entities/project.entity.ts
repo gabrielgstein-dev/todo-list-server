@@ -22,7 +22,7 @@ export class ProjectEntity {
   name: string;
 
   @Column({
-    name: 'user_id',
+    name: 'id_user',
   })
   userId: number;
 
@@ -30,6 +30,6 @@ export class ProjectEntity {
   taskList: TaskEntity[];
 
   @ManyToOne(() => UserEntity, (user) => user.projectList)
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn({ name: 'id_user' })
   user: UserEntity;
 }

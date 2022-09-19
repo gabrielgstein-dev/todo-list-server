@@ -20,11 +20,17 @@ export class TaskEntity {
   name: string;
 
   @Column({
-    name: 'project_id',
+    type: 'varchar',
+    name: 'done',
+  })
+  done: boolean;
+
+  @Column({
+    name: 'id_project',
   })
   projectId: number;
 
   @ManyToOne(() => ProjectEntity, (project) => project.taskList)
-  @JoinColumn({ name: 'project_id' })
+  @JoinColumn({ name: 'id_project' })
   project: ProjectEntity;
 }

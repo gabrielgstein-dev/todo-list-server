@@ -1,5 +1,4 @@
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthHelper } from '../helpers/auth.helper';
 import { UserService } from '../services/user.service';
 
@@ -20,7 +19,7 @@ export class AuthGuard implements CanActivate {
           valid = true;
         }
       } catch (error) {
-        console.error(error);
+        console.error('AuthError', error);
       }
     }
     return valid;

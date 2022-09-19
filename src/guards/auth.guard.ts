@@ -13,13 +13,11 @@ export class AuthGuard implements CanActivate {
     let valid = false;
     if (bearer) {
       try {
-        valid = !!(await AuthHelper.verifyBearerToken(bearer));
-        const { id }: any = valid;
+        const { id }: any = await AuthHelper.verifyBearerToken(bearer);
         const user = await this.userService.findById(id);
-        if (!user) {
-          valid = false;
-        } else {
+        if (user) {
           request.user = user;
+          valid = true;
         }
       } catch (error) {
         console.error(error);
